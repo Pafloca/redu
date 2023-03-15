@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('groups', 'GroupsController');
     Route::resource('tasks', 'TasksController');
+    Route::resource('taskAlumn', 'TaskAlumnController');
 
     Route::get('/groupsInvite/{id}', [\App\Http\Controllers\GroupsController::class, 'invite']);
 

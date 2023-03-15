@@ -95,7 +95,7 @@
                 <td>{{ $task->description }}</td>
                 <td>{{ \App\Models\User::findOrFail($task->user_teacher_id)->name }}</td>
                 <td>
-                    <a href="{{ route('groups.edit', $task->id) }}">
+                    <a href="{{ route('tasks.show', $task->id) }}">
                         <button class="btn btn-success">
                             View
                         </button>

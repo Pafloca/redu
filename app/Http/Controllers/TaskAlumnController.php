@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Groups;
-use App\Models\Tasks;
-use App\Models\User;
+use App\Models\TaskAlumn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TasksController extends Controller
+class TaskAlumnController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +25,7 @@ class TasksController extends Controller
      */
     public function create()
     {
-        return view('layouts/redu.createTask');
+        //
     }
 
     /**
@@ -38,15 +36,20 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new Tasks();
+        $task = new TaskAlumn();
         $task->title = $request->get('title');
         $task->description = $request->get('description');
-        $task->user_teacher_id = Auth::id();
-        $task->group_id = $request->get('group_id');
+        $task->user_alumn_id = Auth::id();
+        $task->task_id = $request->get('task_id');
 
         $task->save();
 
-        return redirect("/groups/$task->group_id");
+        if ($request->file('foto')) {
+            $imagen = $task->id . "-task.jpg";
+            $request->file('foto')->move(public_path('taskImg'), $imagen);
+        }
+
+        return redirect("/groups");
     }
 
     /**
@@ -57,9 +60,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = Tasks::findOrFail($id);
-        $users = User::get();
-        return view('layouts/redu.taskShow', compact("task", "users"));
+        //
     }
 
     /**

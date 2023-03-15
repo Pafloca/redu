@@ -33,7 +33,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('tasks_alumn', function (Blueprint $table) {
+        Schema::create('task_alumns', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('title',100);
             $table->string('description',500);
