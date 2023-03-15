@@ -30,16 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('disponibles', 'MenuController');
-
-    Route::resource('profesores', 'ProfesController');
-
-    Route::resource('reservas', 'ReservaController');
-
-
     Route::resource('groups', 'GroupsController');
+    Route::resource('tasks', 'TasksController');
 
     Route::get('/groupsInvite/{id}', [\App\Http\Controllers\GroupsController::class, 'invite']);
+
+    Route::get('/profile/{id}', [ProfileController::class, 'profile']);
 });
 
 

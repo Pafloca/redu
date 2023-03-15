@@ -21,21 +21,19 @@
                     <h4>Teachers & Alumns</h4>
                     <div class="form-field mb-4">
                         <label class="label" for="overbooking">Authorized teachers</label><br>
-                        <select name="profesCoc[]" id="field1" multiple
-                                onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))"
-                                multiselect-hide-x="true" required>
+                        <select name="profesCoc" id="field1" required>
+                            <option value="" selected>-- teachers --</option>
                             @foreach($arrayTeacher as $profe)
-                                <option value="{{ $profe->id }}" selected>{{ $profe->name }}</option>
+                                <option value="{{ $profe->id }}">{{ $profe->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-field mb-4">
                         <label class="label" for="overbooking">Authorized alumns</label><br>
-                        <select name="profesCoc[]" id="field1" multiple
-                                onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))"
-                                multiselect-hide-x="true" required>
+                        <select name="profesCoc" id="field1" onchange="handleSelect(this)" required>
+                            <option value="" selected>-- alumns --</option>
                             @foreach($arrayAlumn as $alumn)
-                                <option value="{{ $alumn->id }}" selected>{{ $alumn->name }}</option>
+                                <option value="{{ $alumn->id }}">{{ $alumn->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -60,7 +58,7 @@
                         </div>
                     </div>
                     <div class="col text-left">
-                        <p><b>Invite people:</b> http://localhost/groupsInvite/{{$group->id}}</p>
+                        <p><b>Invite people:</b> http://127.0.0.1:8000/groupsInvite/{{$group->id}}</p>
                     </div>
                     </div>
                     @endif
@@ -70,14 +68,15 @@
     </div>
 
     <div class="container">
-        <h1 class="text-center text-white">Tasks</h1>
+        <h1 class="text-center text-white mb-4">Tasks</h1>
         @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->rol === 'teacher')
             <div class="col text-center mb-5">
-                <a href="{{ route('groups.create') }}">
+                <form action="{{ route('tasks.create') }}" method="GET">
+                    <input type="hidden" name="group" value="{{ $group->id }}">
                     <button class="btn btn-success">
                         Create Task
                     </button>
-                </a>
+                </form>
             </div>
         @endif
         <table class="table table-dark table-striped table-responsive-md text-center">
@@ -91,6 +90,7 @@
             </thead>
             <tbody>
             @foreach($tasks as $task)
+                <tr>
                 <td>{{ $task->title }}</td>
                 <td>{{ $task->description }}</td>
                 <td>{{ \App\Models\User::findOrFail($task->user_teacher_id)->name }}</td>
@@ -111,6 +111,7 @@
                         </button>
                     </a>
                 </td>
+                </tr>
             @endforeach
             </tbody>
             <tfoot>

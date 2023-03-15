@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Tasks;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -63,5 +64,12 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/login');
+    }
+
+    public function profile($id)
+    {
+        $user = User::findOrFail($id);
+        $tasks = Tasks::get();
+        return view('layouts/redu.user', compact("user", "tasks"));
     }
 }
