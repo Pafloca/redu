@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\ProfesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
@@ -16,14 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/dashboard', function () {
-    return view('welcome');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', [MenuController::class, 'index']);
+    Route::get('/', [GroupsController::class, 'index']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -35,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('taskAlumn', 'TaskAlumnController');
 
     Route::get('/groupsInvite/{id}', [\App\Http\Controllers\GroupsController::class, 'invite']);
+
+    Route::get('/userTasks/{id}', [ProfileController::class, 'userTasks']);
 
     Route::get('/profile/{id}', [ProfileController::class, 'profile']);
 });

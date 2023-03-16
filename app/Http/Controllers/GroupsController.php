@@ -91,7 +91,8 @@ class GroupsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $group = Groups::findOrFail($id);
+        return view('layouts/redu.editGroup', compact('group'));
     }
 
     /**
@@ -103,7 +104,18 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = Groups::findOrFail($id);
+        $group->name = $request->get('name');
+        $group->acronym = $request->get('acronym');
+
+        $group->save();
+
+        if ($request->file('foto')) {
+            $imagen = $group->id . "-group.jpg";
+            $request->file('foto')->move(public_path('img'), $imagen);
+        }
+
+        return redirect("/groups/$group->id");
     }
 
     /**

@@ -95,21 +95,34 @@
                 <td>{{ $task->description }}</td>
                 <td>{{ \App\Models\User::findOrFail($task->user_teacher_id)->name }}</td>
                 <td>
-                    <a href="{{ route('tasks.show', $task->id) }}">
-                        <button class="btn btn-success">
-                            View
-                        </button>
-                    </a>
-                    <a href="{{ route('groups.edit', $task->id) }}">
-                        <button class="btn btn-warning">
-                            Edit
-                        </button>
-                    </a>
-                    <a href="{{ route('groups.edit', $task->id) }}">
-                        <button class="btn btn-danger">
-                            Delete
-                        </button>
-                    </a>
+                    @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->rol === 'teacher')
+                        <div class="container mt-3">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <a href="{{ route('tasks.show', $task->id) }}">
+                                        <button class="btn btn-success">
+                                            View
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col text-left">
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('tasks.show', $task->id) }}">
+                            <button class="btn btn-success">
+                                Make
+                            </button>
+                        </a>
+                    @endif
                 </td>
                 </tr>
             @endforeach

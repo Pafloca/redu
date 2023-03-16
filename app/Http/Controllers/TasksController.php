@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Groups;
+use App\Models\TaskAlumn;
 use App\Models\Tasks;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -58,8 +59,17 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = Tasks::findOrFail($id);
-        $users = User::get();
-        return view('layouts/redu.taskShow', compact("task", "users"));
+
+        $group = Groups::findOrFail($task->group_id);
+        $alumns = $group->alumnGroup;
+
+        $users = TaskAlumn::where("task_id", "=", $id)->get();
+        $usersRealiced = [];
+        foreach ($users as $alumn) {
+            $usersRealiced[] = $alumn->user_alumn_id;
+        }
+
+        return view('layouts/redu.taskShow', compact("task", "alumns", "usersRealiced"));
     }
 
     /**
@@ -82,7 +92,13 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Tasks::findOrFail($id);
+        $task->title = $request->get('title');
+        $task->description = $request->get('description');
+
+        $task->save();
+
+        return redirect("/tasks/$task->id");
     }
 
     /**
@@ -93,6 +109,8 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Tasks::findOrFail($id);
+        $task->delete();
+        return redirect("/groups/$task->group_id");
     }
 }

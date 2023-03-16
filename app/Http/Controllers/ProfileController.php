@@ -66,10 +66,16 @@ class ProfileController extends Controller
         return Redirect::to('/login');
     }
 
-    public function profile($id)
+    public function userTasks($id)
     {
         $user = User::findOrFail($id);
         $tasks = Tasks::get();
         return view('layouts/redu.user', compact("user", "tasks"));
+    }
+
+    public function profile($id)
+    {
+        $user = User::findOrFail($id);
+        return view('layouts/redu.profile', compact("user"));
     }
 }
