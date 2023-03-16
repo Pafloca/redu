@@ -15,8 +15,7 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $user = User::findOrFail(Auth::id());
-        return view('layouts/vistas.perfil', compact('user'));
+
     }
 
     /**
@@ -75,6 +74,9 @@ class ProfileController extends Controller
 
     public function profile($id)
     {
+        if(\Illuminate\Support\Facades\Auth::id() != $id) {
+            return redirect("/groups");
+        }
         $user = User::findOrFail($id);
         return view('layouts/redu.profile', compact("user"));
     }

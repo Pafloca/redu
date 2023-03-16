@@ -31,6 +31,10 @@ class GroupsController extends Controller
      */
     public function create()
     {
+        if(\Illuminate\Support\Facades\Auth::user()->rol === 'alumn') {
+            return redirect("/groups");
+        }
+
         return view('layouts/redu.createGroup');
     }
 
@@ -98,6 +102,9 @@ class GroupsController extends Controller
      */
     public function edit($id)
     {
+        if(\Illuminate\Support\Facades\Auth::user()->rol === 'alumn') {
+            return redirect("/groups");
+        }
         $group = Groups::findOrFail($id);
         return view('layouts/redu.editGroup', compact('group'));
     }

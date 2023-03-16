@@ -61,6 +61,9 @@ class TaskAlumnController extends Controller
      */
     public function show($id)
     {
+        if(\Illuminate\Support\Facades\Auth::user()->rol === 'alumn') {
+            return redirect("/groups");
+        }
         $task = TaskAlumn::findOrFail($id);
         return view('layouts/redu.alumnTaskShow', compact("task"));
     }

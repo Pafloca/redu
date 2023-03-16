@@ -20,7 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [GroupsController::class, 'index']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
@@ -34,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile/{id}', [ProfileController::class, 'profile']);
 });
+
+
 
 
 require __DIR__.'/auth.php';
