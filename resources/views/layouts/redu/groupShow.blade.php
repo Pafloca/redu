@@ -117,20 +117,33 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('tasks.show', $task->id) }}">
-                            <button class="btn btn-success">
-                                Make
-                            </button>
-                        </a>
+                        @if(in_array($task->id, $usersRealiced))
+                                <?php
+                                    $tasks = \App\Models\TaskAlumn::where("user_alumn_id", "=", \Illuminate\Support\Facades\Auth::id())->where("task_id", "=",$task->id)->get();
+                                    $idTask = null;
+                                    foreach ($tasks as $taske) {
+                                        $idTask = $taske->id;
+                                    }
+                                    ?>
+                            <a href="{{ route('taskAlumn.edit', $idTask)}}">
+                                <button class="btn btn-success">
+                                    Realized
+                                </button>
+                            </a>
+                        @else
+                            <a href="{{ route('tasks.show', $task->id) }}">
+                                <button class="btn btn-warning">
+                                    Make
+                                </button>
+                            </a>
+                        @endif
                     @endif
                 </td>
                 </tr>
             @endforeach
             </tbody>
             <tfoot>
-            <th class="text-white text-left" colspan="1">Total reservas:</th>
-            <th class="text-white text-left" colspan="1">Plazas restantes:</th>
-            <th class="text-white text-left">Aceptadas: </th>
+            <th class="text-white text-left" colspan="4">Total Tasks: {{ count($tasks) }}</th>
             </tfoot>
         </table>
     </div>

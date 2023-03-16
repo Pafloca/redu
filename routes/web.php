@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\GroupsController;
-use App\Http\Controllers\ProfesController;
-use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 

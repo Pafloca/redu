@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskAlumn;
+use App\Models\Tasks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,7 +61,8 @@ class TaskAlumnController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = TaskAlumn::findOrFail($id);
+        return view('layouts/redu.alumnTaskShow', compact("task"));
     }
 
     /**
@@ -71,7 +73,9 @@ class TaskAlumnController extends Controller
      */
     public function edit($id)
     {
-        //
+        $taskAlumn = TaskAlumn::findOrFail($id);
+        $task = Tasks::findOrFail($taskAlumn->task_id);
+        return view('layouts/redu.taskShowEdit', compact('task', "taskAlumn"));
     }
 
     /**
@@ -83,7 +87,18 @@ class TaskAlumnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = TaskAlumn::findOrFail($id);
+        $task->title = $request->get('title');
+        $task->description = $request->get('description');
+
+        $task->save();
+
+        if ($request->file('foto')) {
+            $imagen = $task->id . "-task.jpg";
+            $request->file('foto')->move(public_path('taskImg'), $imagen);
+        }
+
+        return redirect("/groups");
     }
 
     /**

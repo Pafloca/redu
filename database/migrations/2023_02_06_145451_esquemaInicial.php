@@ -25,7 +25,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('title',100);
-            $table->string('description',500);
+            $table->string('description',1000);
             $table->bigInteger('user_teacher_id')->unsigned()->default(1);
             $table->foreign('user_teacher_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('group_id')->unsigned()->default(1);
@@ -36,7 +36,7 @@ return new class extends Migration
         Schema::create('task_alumns', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('title',100);
-            $table->string('description',500);
+            $table->string('description',1000);
             $table->bigInteger('user_alumn_id')->unsigned()->default(1);
             $table->foreign('user_alumn_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('task_id')->unsigned()->default(1);

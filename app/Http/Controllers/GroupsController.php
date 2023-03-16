@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Groups;
+use App\Models\TaskAlumn;
 use App\Models\Tasks;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -80,7 +81,13 @@ class GroupsController extends Controller
 
         $tasks = Tasks::where('group_id', '=', $id)->get();
 
-        return view('layouts/redu.groupShow', compact('group', 'arrayTeacher', 'arrayAlumn', 'tasks'));
+        $tareas = TaskAlumn::where("user_alumn_id", "=", Auth::id())->get();
+        $usersRealiced = [];
+        foreach ($tareas as $alumn) {
+            $usersRealiced[] = $alumn->task_id;
+        }
+
+        return view('layouts/redu.groupShow', compact('group', 'arrayTeacher', 'arrayAlumn', 'tasks', "usersRealiced"));
     }
 
     /**
