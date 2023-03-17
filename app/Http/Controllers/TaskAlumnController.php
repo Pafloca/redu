@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskAlumnPost;
 use App\Models\TaskAlumn;
 use App\Models\Tasks;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class TaskAlumnController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskAlumnPost $request)
     {
         $task = new TaskAlumn();
         $task->title = $request->get('title');
@@ -64,6 +65,7 @@ class TaskAlumnController extends Controller
         if(\Illuminate\Support\Facades\Auth::user()->rol === 'alumn') {
             return redirect("/groups");
         }
+
         $task = TaskAlumn::findOrFail($id);
         return view('layouts/redu.alumnTaskShow', compact("task"));
     }
@@ -88,7 +90,7 @@ class TaskAlumnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskAlumnPost $request, $id)
     {
         $task = TaskAlumn::findOrFail($id);
         $task->title = $request->get('title');

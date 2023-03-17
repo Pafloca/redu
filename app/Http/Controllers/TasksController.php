@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskPost;
 use App\Models\Groups;
 use App\Models\TaskAlumn;
 use App\Models\Tasks;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,11 +39,12 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskPost $request)
     {
         $task = new Tasks();
         $task->title = $request->get('title');
         $task->description = $request->get('description');
+        $task->date_end = $request->get('dateEnd');
         $task->user_teacher_id = Auth::id();
         $task->group_id = $request->get('group_id');
 
@@ -69,6 +72,21 @@ class TasksController extends Controller
             $usersRealiced[] = $alumn->user_alumn_id;
         }
 
+        $arrayUserId = [];
+        foreach ($group->userGroup as $user) {
+            $arrayUserId[] = $user->id;
+        }
+        if(!in_array(Auth::id(), $arrayUserId)) {
+            return redirect("/groups");
+        }
+
+
+        $today = new DateTime("now");
+        $dateTask =new DateTime($task->date_end);
+        if(($today > $dateTask) && Auth::user()->rol === 'alumn') {
+            return redirect("/groups");
+        }
+
         return view('layouts/redu.taskShow', compact("task", "alumns", "usersRealiced"));
     }
 
@@ -90,11 +108,12 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskPost $request, $id)
     {
         $task = Tasks::findOrFail($id);
         $task->title = $request->get('title');
         $task->description = $request->get('description');
+        $task->date_end = $request->get('dateEnd');
 
         $task->save();
 

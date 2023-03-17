@@ -26,6 +26,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->string('title',100);
             $table->string('description',1000);
+            $table->date('date_end');
             $table->bigInteger('user_teacher_id')->unsigned()->default(1);
             $table->foreign('user_teacher_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('group_id')->unsigned()->default(1);

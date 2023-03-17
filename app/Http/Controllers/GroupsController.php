@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GroupPost;
 use App\Models\Groups;
 use App\Models\TaskAlumn;
 use App\Models\Tasks;
@@ -44,7 +45,7 @@ class GroupsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupPost $request)
     {
         $group = new Groups();
         $group->name = $request->get('name');
@@ -83,6 +84,14 @@ class GroupsController extends Controller
             $arrayAlumn[] = $alumn;
         }
 
+        $arrayUserId = [];
+        foreach ($group->userGroup as $user) {
+            $arrayUserId[] = $user->id;
+        }
+        if(!in_array(Auth::id(), $arrayUserId)) {
+            return redirect("/groups");
+        }
+
         $tasks = Tasks::where('group_id', '=', $id)->get();
 
         $tareas = TaskAlumn::where("user_alumn_id", "=", Auth::id())->get();
@@ -116,7 +125,7 @@ class GroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GroupPost $request, $id)
     {
         $group = Groups::findOrFail($id);
         $group->name = $request->get('name');

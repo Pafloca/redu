@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProfEdit extends FormRequest
+class TaskPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,15 @@ class ProfEdit extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|min:3',
-            'tipo' => 'required'
+            'title' => 'required',
+            'description' => 'required',
+            'dateEnd' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre es olbigatorio',
-            'nombre.min' => 'El nombre tiene que tener más de 3 caracteres',
-            'tipo.required' => 'EL tipo es obligatorio'
         ];
     }
 }

@@ -22,6 +22,10 @@
                 <textarea id="overbooking" class="input-text js-input" name="description" required rows="4" cols="50"></textarea>
                 <label class="label" for="overbooking">Desription</label>
             </div>
+            <div class="form-field col-lg-12 col">
+                <input id="date" class="input-text js-input" type="date" name="dateEnd">
+                <label class="label" for="date">End of Task</label>
+            </div>
             <div class="form-field col-lg-6">
                 <input class="submit-btn" type="submit" value="Create">
             </div>

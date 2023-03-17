@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Groups;
+use App\Models\TaskAlumn;
 use App\Models\Tasks;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -67,9 +69,25 @@ class ProfileController extends Controller
 
     public function userTasks($id)
     {
+        $group = Groups::findOrFail($_GET["group"]);
+        $arrayUserId = [];
+        foreach ($group->userGroup as $user) {
+            $arrayUserId[] = $user->id;
+        }
+        if(\Illuminate\Support\Facades\Auth::user()->rol !== 'teacher' || !in_array(Auth::id(), $arrayUserId)) {
+            return redirect("/groups");
+        }
+
         $user = User::findOrFail($id);
-        $tasks = Tasks::get();
-        return view('layouts/redu.user', compact("user", "tasks"));
+        $tasks = Tasks::where('group_id', '=', $_GET["group"])->get();
+
+        $tareas = TaskAlumn::where("user_alumn_id", "=", $id)->get();
+        $usersRealiced = [];
+        foreach ($tareas as $alumn) {
+            $usersRealiced[] = $alumn->task_id;
+        }
+
+        return view('layouts/redu.user', compact("user", "tasks", "usersRealiced"));
     }
 
     public function profile($id)

@@ -17,4 +17,8 @@ class Groups extends Model
     public function teacherGroup(){
         return $this->belongsToMany(User::class, 'user_group')->where('rol', '=', 'teacher');
     }
+
+    public function userGroup(){
+        return $this->belongsToMany(User::class, 'user_group');
+    }
 }

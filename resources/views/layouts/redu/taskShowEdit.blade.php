@@ -19,6 +19,8 @@
                     <h5 class="card-title text-center" style="font-size: 30px">{{$task->title}}</h5>
                     <h4>Description:</h4>
                     <p>{{$task->description}}</p>
+                    <h3>End of the Task:</h3>
+                    <p>{{$task->date_end}}</p>
                 </div>
                 <p>From: {{ \App\Models\User::findOrFail($task->user_teacher_id)->name }}</p>
             </div>
