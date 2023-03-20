@@ -34,11 +34,11 @@
                         @csrf
                         <input name="task_id" value="{{ $task->id }}" type="hidden">
                         <div class="form-field col-lg-12">
-                            <input id="overbooking" class="input-text js-input" name="title" type="text" required>
+                            <input class="input-text js-input" name="title" type="text" required>
                             <label class="label" for="overbooking">Title</label>
                         </div>
                         <div class="form-field col-lg-12">
-                            <textarea id="overbooking" class="input-text js-input" name="description" required rows="4" cols="50"></textarea>
+                            <textarea class="input-text js-input" name="description" required rows="4" cols="50"></textarea>
                             <label class="label" for="overbooking">Description</label>
                         </div>
                         <div class="form-field col-lg-6">
@@ -59,16 +59,16 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-field col-lg-6">
-                                    <input id="overbooking" class="input-text js-input" name="title" value="{{ $task->title }}" type="text" required>
-                                    <label class="label" for="overbooking">Title of Task</label>
+                                    <input class="input-text js-input" name="title" value="{{ $task->title }}" type="text" required>
+                                    <label class="label">Title of Task</label>
                                 </div>
                                 <div class="form-field col-lg-6 col">
                                     <input id="date" class="input-text js-input" type="date" value="{{ $task->date_end }}" name="dateEnd">
                                     <label class="label" for="date">End of Task</label>
                                 </div>
                                 <div class="form-field col-lg-12">
-                                    <textarea id="overbooking" class="input-text js-input" name="description" required rows="4" cols="50">{{ $task->description }}</textarea>
-                                    <label class="label" for="overbooking">Desription</label>
+                                    <textarea class="input-text js-input" name="description" required rows="4" cols="50">{{ $task->description }}</textarea>
+                                    <label class="label">Desription</label>
                                 </div>
                                 <div class="form-field col-lg-6">
                                     <input class="submit-btn" type="submit" value="Edit">

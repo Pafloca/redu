@@ -33,22 +33,31 @@
                         @csrf
                         @method('PUT')
                         <div class="form-field col-lg-12">
-                            <input id="overbooking" class="input-text js-input" name="title" value="{{$taskAlumn->title}}" type="text" required>
-                            <label class="label" for="overbooking">Title</label>
+                            <input class="input-text js-input" name="title" value="{{$taskAlumn->title}}" type="text" @if($taskAlumn->mark) disabled @endif required>
+                            <label class="label">Title</label>
                         </div>
                         <div class="form-field col-lg-12">
-                            <textarea id="overbooking" class="input-text js-input" name="description" required rows="4" cols="50">{{ $taskAlumn->description }}</textarea>
-                            <label class="label" for="overbooking">Description</label>
+                            <textarea class="input-text js-input" name="description" required rows="4" cols="50" @if($taskAlumn->mark) disabled @endif>{{ $taskAlumn->description }}</textarea>
+                            <label class="label">Description</label>
                         </div>
                         <div class="form-field col-lg-6">
-                            <label class="label" for="menu">Image</label>
-                            <input class="form-control input-text js-input seleccionar" name='foto' type="file" />
+                            <label class="label">Image</label>
+                            <input class="form-control input-text js-input seleccionar" name='foto' type="file" @if($taskAlumn->mark) disabled @endif />
                         </div>
                         <div class="form-field col-lg-6">
-                            <input class="submit-btn" type="submit" value="Edit">
+                            <input class="submit-btn" type="submit" @if($taskAlumn->mark) disabled @endif value="Edit">
                         </div>
                     </form>
                     </div>
+                    <h5 class="text-center">FeedBack:</h5>
+                    <div class="border border-primary mb-2 p-2">
+                        <h6>Mark: @if($taskAlumn->mark) {{$taskAlumn->mark}} @else Not Corrected  @endif</h6>
+                    </div>
+                    <div class="border border-primary p-2">
+                        <h6>Teacher:</h6>
+                        <p>{{$taskAlumn->feedback}}</p>
+                    </div>
+
                 </section>
             </div>
         </div>

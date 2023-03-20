@@ -15,11 +15,11 @@
             @csrf
             <input name="group_id" value="{{$_GET["group"]}}" type="hidden">
             <div class="form-field col-lg-12">
-                <input id="overbooking" class="input-text js-input" name="title" type="text" required>
+                <input class="input-text js-input" name="title" type="text" required>
                 <label class="label" for="overbooking">Title of Task</label>
             </div>
             <div class="form-field col-lg-12">
-                <textarea id="overbooking" class="input-text js-input" name="description" required rows="4" cols="50"></textarea>
+                <textarea class="input-text js-input" name="description" required rows="4" cols="50"></textarea>
                 <label class="label" for="overbooking">Desription</label>
             </div>
             <div class="form-field col-lg-12 col">

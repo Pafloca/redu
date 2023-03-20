@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MarkPost;
 use App\Http\Requests\TaskAlumnPost;
 use App\Models\TaskAlumn;
 use App\Models\Tasks;
@@ -102,6 +103,17 @@ class TaskAlumnController extends Controller
             $imagen = $task->id . "-task.jpg";
             $request->file('foto')->move(public_path('taskImg'), $imagen);
         }
+
+        return redirect("/groups");
+    }
+
+    public function updateMark(MarkPost $request, $id)
+    {
+        $task = TaskAlumn::findOrFail($id);
+        $task->mark = $request->get('note');
+        $task->feedback = $request->get('desc');
+
+        $task->save();
 
         return redirect("/groups");
     }

@@ -15,11 +15,11 @@
             @csrf
             @method('PUT')
             <div class="form-field col-lg-6 ">
-                <input id="overbooking" class="input-text js-input" name="name" value="{{ $group->name }}" type="text" required>
+                <input class="input-text js-input" name="name" value="{{ $group->name }}" type="text" required>
                 <label class="label" for="overbooking">Name of Group</label>
             </div>
             <div class="form-field col-lg-6 ">
-                <input id="overbooking" class="input-text js-input" name="acronym" value="{{ $group->acronym }}" type="text" required>
+                <input class="input-text js-input" name="acronym" value="{{ $group->acronym }}" type="text" required>
                 <label class="label" for="overbooking">Acronym</label>
             </div>
             <div class="form-field col-lg-6">

@@ -42,6 +42,8 @@ return new class extends Migration
             $table->foreign('user_alumn_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('task_id')->unsigned()->default(1);
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer("mark")->default(0);
+            $table->string('feedback',1000)->nullable();
             $table->timestamps();
         });
 

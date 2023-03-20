@@ -14,11 +14,11 @@
         <form class="contact-form row" action="{{ route('groups.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="form-field col-lg-6 ">
-                <input id="overbooking" class="input-text js-input" name="name" type="text" required>
+                <input class="input-text js-input" name="name" type="text" required>
                 <label class="label" for="overbooking">Name of Group</label>
             </div>
             <div class="form-field col-lg-6 ">
-                <input id="overbooking" class="input-text js-input" name="acronym" type="text" required>
+                <input class="input-text js-input" name="acronym" type="text" required>
                 <label class="label" for="overbooking">Acronym</label>
             </div>
             <div class="form-field col-lg-6">

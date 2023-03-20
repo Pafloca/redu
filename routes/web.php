@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/userTasks/{id}', [ProfileController::class, 'userTasks']);
 
     Route::get('/profile/{id}', [ProfileController::class, 'profile']);
+
+    Route::put("/updateNote/{id}", [\App\Http\Controllers\TaskAlumnController::class, 'updateMark']);
 });
 
 
