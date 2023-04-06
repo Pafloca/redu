@@ -69,7 +69,7 @@ class TasksController extends Controller
         $users = TaskAlumn::where("task_id", "=", $id)->get();
         $usersRealiced = [];
         foreach ($users as $alumn) {
-            $usersRealiced[] = $alumn->user_alumn_id;
+            $usersRealiced[] = $alumn->student_id;
         }
 
         $arrayUserId = [];

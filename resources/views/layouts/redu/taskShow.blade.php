@@ -109,7 +109,7 @@
                         </td>
                         <td>
                                 <?php
-                                    $tasks = \App\Models\TaskAlumn::where("user_alumn_id", "=", $alumn->id)->where("task_id", "=",$task->id)->get();
+                                    $tasks = \App\Models\TaskAlumn::where("student_id", "=", $alumn->id)->where("task_id", "=",$task->id)->get();
                                     $idTask = null;
                                     foreach ($tasks as $taske) {
                                         $idTask = $taske->id;

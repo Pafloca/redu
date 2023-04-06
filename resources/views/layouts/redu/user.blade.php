@@ -26,7 +26,7 @@
                     <td>
                             @if(in_array($task->id, $usersRealiced))
                                     <?php
-                                    $tasks2 = \App\Models\TaskAlumn::where("user_alumn_id", "=", $user->id)->where("task_id", "=",$task->id)->get();
+                                    $tasks2 = \App\Models\TaskAlumn::where("student_id", "=", $user->id)->where("task_id", "=",$task->id)->get();
                                     $idTask = null;
                                     foreach ($tasks2 as $taske) {
                                         $idTask = $taske->id;

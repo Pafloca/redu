@@ -34,12 +34,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('task_alumns', function (Blueprint $table) {
+        Schema::create('student_tasks', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('title',100);
+            $table->string('name',100);
             $table->string('description',1000);
-            $table->bigInteger('user_alumn_id')->unsigned()->default(1);
-            $table->foreign('user_alumn_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('img',1000);
+            $table->bigInteger('student_id')->unsigned()->default(1);
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('task_id')->unsigned()->default(1);
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
             $table->integer("mark")->default(0);

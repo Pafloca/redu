@@ -94,7 +94,7 @@ class GroupsController extends Controller
 
         $tasks = Tasks::where('group_id', '=', $id)->get();
 
-        $tareas = TaskAlumn::where("user_alumn_id", "=", Auth::id())->get();
+        $tareas = TaskAlumn::where("student_id", "=", Auth::id())->get();
         $usersRealiced = [];
         foreach ($tareas as $alumn) {
             $usersRealiced[] = $alumn->task_id;

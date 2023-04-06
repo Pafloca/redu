@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TaskAlumn extends Model
 {
     use HasFactory;
+    protected $table = 'student_tasks';
 }

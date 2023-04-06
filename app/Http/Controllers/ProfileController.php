@@ -81,7 +81,7 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $tasks = Tasks::where('group_id', '=', $_GET["group"])->get();
 
-        $tareas = TaskAlumn::where("user_alumn_id", "=", $id)->get();
+        $tareas = TaskAlumn::where("student_id", "=", $id)->get();
         $usersRealiced = [];
         foreach ($tareas as $alumn) {
             $usersRealiced[] = $alumn->task_id;

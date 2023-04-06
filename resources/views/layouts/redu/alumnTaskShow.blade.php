@@ -13,8 +13,8 @@
             @endif
             <div class="card text-white bg-black m-3 col-8">
                 <div class="card-body">
-                    <h2 class="card-title text-center"><u>Task from {{ \App\Models\User::findOrFail($task->user_alumn_id)->name }}</u></h2>
-                    <h3 class="card-title">{{ $task->title }}</h3>
+                    <h2 class="card-title text-center"><u>Task from {{ \App\Models\User::findOrFail($task->student_id)->name }}</u></h2>
+                    <h3 class="card-title">{{ $task->name }}</h3>
                     <p class="card-text">{{ $task->description }}</p>
                 </div>
                 @if(file_exists(public_path("taskImg/$task->id-task.jpg")))
