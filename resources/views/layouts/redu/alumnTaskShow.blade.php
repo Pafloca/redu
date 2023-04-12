@@ -11,7 +11,7 @@
                     </div>
                 @endforeach
             @endif
-            <div class="card text-white bg-black m-3 col-8">
+            <div class="card text-white bg-black m-3 col-md-8">
                 <div class="card-body">
                     <h2 class="card-title text-center"><u>Task from {{ \App\Models\User::findOrFail($task->student_id)->name }}</u></h2>
                     <h3 class="card-title">{{ $task->name }}</h3>
@@ -23,7 +23,7 @@
                     <img src="{{ asset("/img/imgPred.png") }}" class="img-fluid rounded-start m-2" alt="menu">
                 @endif
             </div>
-            <div class="card text-white bg-black m-3 col">
+            <div class="card text-white bg-black m-3 col-md-3">
                 <div class="card-body">
                     <h2 class="card-title text-center"><u>Feedback</u></h2>
 

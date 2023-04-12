@@ -163,4 +163,37 @@ class GroupsController extends Controller
         return redirect("/groups");
     }
 
+    public function addAlumnGroup(Request $request) {
+        $user_id = $request->get('user_id');
+        $group_id = $request->get('group_id');
+        $user = User::findOrFail($user_id);
+        $group = Groups::findOrFail($group_id);
+        $group->teacherGroup()->attach($user);
+        return redirect("/studentList/$group_id");
+    }
+
+    public function alumnList($id) {
+        $group = Groups::findOrFail($id);
+        $students = User::where("rol", "=", 'alumn')->get();
+        $teachers = User::where("rol", "=", 'teacher')->get();
+        $arrayAlumn = [];
+        foreach ($group->alumnGroup as $alumn) {
+            $arrayAlumn[] = $alumn->id;
+        }
+        $arrayTeacher = [];
+        foreach ($group->teacherGroup as $profe) {
+            $arrayTeacher[] = $profe->id;
+        }
+        return view('layouts/redu.listAlumn', compact('group', 'students', 'teachers', 'id', 'arrayAlumn', 'arrayTeacher'));
+    }
+
+    public function deleteUserList(Request $request) {
+        $user_id = $request->get('user_id');
+        $group_id = $request->get('group_id');
+        $user = User::findOrFail($user_id);
+        $group = Groups::findOrFail($group_id);
+        $group->teacherGroup()->detach($user);
+        return redirect("/studentList/$group_id");
+    }
+
 }

@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('taskAlumn', 'TaskAlumnController');
 
     Route::get('/groupsInvite/{id}', [\App\Http\Controllers\GroupsController::class, 'invite']);
+    Route::post('/addStudentGroup', [\App\Http\Controllers\GroupsController::class, 'addAlumnGroup']);
+    Route::post('/deleteStudentGroup', [\App\Http\Controllers\GroupsController::class, 'deleteUserList']);
+    Route::get('/studentList/{id}', [\App\Http\Controllers\GroupsController::class, 'alumnList']);
 
     Route::get('/userTasks/{id}', [ProfileController::class, 'userTasks']);
 

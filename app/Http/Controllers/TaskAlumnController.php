@@ -40,9 +40,9 @@ class TaskAlumnController extends Controller
     public function store(TaskAlumnPost $request)
     {
         $task = new TaskAlumn();
-        $task->title = $request->get('title');
+        $task->name = $request->get('title');
         $task->description = $request->get('description');
-        $task->user_alumn_id = Auth::id();
+        $task->student_id = Auth::id();
         $task->task_id = $request->get('task_id');
 
         $task->save();
@@ -94,8 +94,9 @@ class TaskAlumnController extends Controller
     public function update(TaskAlumnPost $request, $id)
     {
         $task = TaskAlumn::findOrFail($id);
-        $task->title = $request->get('title');
+        $task->name = $request->get('title');
         $task->description = $request->get('description');
+        $task->img = '/data/user/0/com.example.users_login_db/cache/'.$task->id . "-task.jpg";
 
         $task->save();
 

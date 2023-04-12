@@ -33,7 +33,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-field col-lg-12">
-                            <input class="input-text js-input" name="title" value="{{$taskAlumn->title}}" type="text" @if($taskAlumn->mark) disabled @endif required>
+                            <input class="input-text js-input" name="title" value="{{$taskAlumn->name}}" type="text" @if($taskAlumn->mark) disabled @endif required>
                             <label class="label">Title</label>
                         </div>
                         <div class="form-field col-lg-12">
