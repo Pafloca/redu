@@ -59,7 +59,6 @@
                                         <select class="form-select" name="rol" aria-label="Default select example">
                                             <option value="" selected>--- Select ROL ---</option>
                                             <option value="teacher">Teacher</option>
-                                            <option value="alumn">Alumn</option>
                                         </select>
                                         <x-input-error :messages="$errors->get('rol')" class="mt-2" />
                                     </div>

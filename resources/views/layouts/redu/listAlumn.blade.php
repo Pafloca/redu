@@ -6,6 +6,7 @@
 <table class="table text-white text-center mt-3">
   <thead>
     <tr>
+        <th scope="col">Img</th>
       <th scope="col">Name</th>
       <th scope="col">E-mail</th>
       <th scope="col">Add</th>
@@ -14,6 +15,13 @@
   <tbody>
   @foreach($students as $user)
       <tr>
+          <th scope="row">
+              @if(file_exists(public_path("profileImg/$user->id-userPP.jpg")))
+                  <img src="{{ asset("profileImg/$user->id-userPP.jpg") }}" class="imgRedonda" alt="menu">
+              @else
+                  <img src="{{ asset("/img/imgPred.png") }}" class="imgRedonda" alt="menu">
+              @endif
+          </th>
           <th scope="row">{{$user->name}}</th>
           <td>{{$user->email}}</td>
           <td>
@@ -59,7 +67,7 @@
         <tbody>
         @foreach($teachers as $user)
             <tr>
-                <th scope="row">{{$user->name}}</th>
+                <th>{{$user->name}}</th>
                 <td>{{$user->email}}</td>
                 <td>
                     @if(in_array($user->id, $arrayTeacher))
