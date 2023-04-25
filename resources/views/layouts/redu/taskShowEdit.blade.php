@@ -24,7 +24,16 @@
                 </div>
                 <p>From: {{ \App\Models\User::findOrFail($task->user_teacher_id)->name }}</p>
             </div>
-
+            <?php
+            $today = new DateTime("now");
+            $dateTask =new DateTime($task->date_end);
+            $datee = null;
+            if($today < $dateTask){
+                $datee = false;
+            } else {
+                $datee = true;
+            }
+            ?>
             <div class="card mt-4 ml-5 bg-dark text-light border border-danger col-lg-8 col-11 mb-4" style="width: 45rem;">
                 <section class="get-in-touch">
                     <div class="card-body">
@@ -33,19 +42,19 @@
                         @csrf
                         @method('PUT')
                         <div class="form-field col-lg-12">
-                            <input class="input-text js-input" name="title" value="{{$taskAlumn->name}}" type="text" @if($taskAlumn->mark) disabled @endif required>
+                            <input class="input-text js-input" name="title" value="{{$taskAlumn->name}}" type="text" @if($taskAlumn->mark || $datee) disabled @endif required>
                             <label class="label">Title</label>
                         </div>
                         <div class="form-field col-lg-12">
-                            <textarea class="input-text js-input" name="description" required rows="4" cols="50" @if($taskAlumn->mark) disabled @endif>{{ $taskAlumn->description }}</textarea>
+                            <textarea class="input-text js-input" name="description" required rows="4" cols="50" @if($taskAlumn->mark || $datee) disabled @endif>{{ $taskAlumn->description }}</textarea>
                             <label class="label">Description</label>
                         </div>
                         <div class="form-field col-lg-6">
                             <label class="label">Image</label>
-                            <input class="form-control input-text js-input seleccionar" name='foto' type="file" @if($taskAlumn->mark) disabled @endif />
+                            <input class="form-control input-text js-input seleccionar" name='foto' type="file" @if($taskAlumn->mark || $datee) disabled @endif />
                         </div>
                         <div class="form-field col-lg-6">
-                            <input class="submit-btn" type="submit" @if($taskAlumn->mark) disabled @endif value="Edit">
+                            <input class="submit-btn" type="submit" @if($taskAlumn->mark || $datee) disabled @endif value="Edit">
                         </div>
                     </form>
                     </div>
