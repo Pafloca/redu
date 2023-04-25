@@ -44,6 +44,7 @@ class TaskAlumnController extends Controller
         $task->description = $request->get('description');
         $task->student_id = Auth::id();
         $task->task_id = $request->get('task_id');
+        $task->img = '/data/user/0/com.example.users_login_db/cache/'.$task->id . "-task.jpg";
 
         $task->save();
 
