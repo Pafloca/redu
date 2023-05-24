@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name',100);
             $table->string('acronym',10);
             $table->bigInteger('user_teacher_id')->unsigned()->default(1);
-            $table->foreign('user_teacher_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_teacher_id')->references('id')
+                ->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
